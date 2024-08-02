@@ -15,6 +15,9 @@ import { ApiResponse } from '../../models/api-response';
 export class ContactListComponent implements OnInit {
 
   contacts: ContactData[] = [];
+  searchKey:string='';
+  currentPage:number = 1;
+  itemsPerPage:number = 5;
 
   @ViewChild(ConfirmationDialogComponent) confirmation?: ConfirmationDialogComponent;
   @ViewChild(EditContactDialogComponent) contactEditor?: EditContactDialogComponent;
@@ -105,5 +108,21 @@ export class ContactListComponent implements OnInit {
       id = lastContact?.id;
     }
     return Number(id) + 1;
+  }
+
+  resetTable(){
+    this.searchKey = "";
+    this.getContacts();
+  }
+
+  filterContacts() {
+    if (!this.searchKey) {
+      return this.contacts;
+    }
+    return this.contacts = this.contacts.filter(c =>
+      c.firstName.toLowerCase().includes(this.searchKey.toLowerCase()) ||
+      c.lastName.toLowerCase().includes(this.searchKey.toLowerCase()) ||
+      c.email.toLowerCase().includes(this.searchKey.toLowerCase())
+    );
   }
 }

@@ -11,6 +11,7 @@ import { ConfirmationDialogComponent } from './components/confirmation-dialog/co
 import { EditContactDialogComponent } from './components/edit-contact-dialog/edit-contact-dialog.component';
 import { ToastrModule } from 'ngx-toastr';
 import { RequestInterceptor } from './services/http-interceptor';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { RequestInterceptor } from './services/http-interceptor';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    NgxPaginationModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true}],
   bootstrap: [AppComponent]
